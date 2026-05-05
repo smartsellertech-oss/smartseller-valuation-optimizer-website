@@ -1,10 +1,13 @@
-# Credenciais — NUNCA commite no Git
+# Credenciais — NUNCA commitar
 .env
+.env.local
+.env.production
 
-# Dependências Node.js
+# Vercel
+.vercel
+
+# Node
 node_modules/
-
-# Logs
 *.log
 npm-debug.log*
 
