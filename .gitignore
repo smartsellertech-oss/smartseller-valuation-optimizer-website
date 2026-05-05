@@ -1,0 +1,13 @@
+# Credenciais — NUNCA commite no Git
+.env
+
+# Dependências Node.js
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
