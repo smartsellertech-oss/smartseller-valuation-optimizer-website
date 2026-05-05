@@ -23,7 +23,7 @@ function cors(res) {
 
 // ── Supabase REST insert (no SDK needed — pure fetch) ─────────
 async function saveToSupabase(data) {
-  const url  = process.env.SUPABASE_URL;
+  const url  = process.env.SUPABASE_URL || 'https://arnkmuxactmghhbgtzgm.supabase.co';
   const key  = process.env.SUPABASE_SERVICE_KEY;
 
   if (!url || !key) {

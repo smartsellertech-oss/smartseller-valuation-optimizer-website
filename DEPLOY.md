@@ -74,8 +74,8 @@ Adicione cada variável abaixo:
 
 | Nome | Valor |
 |---|---|
-| `SUPABASE_URL` | `https://SEU-ID.supabase.co` |
-| `SUPABASE_SERVICE_KEY` | `eyJhbGc...` (service_role key) |
+| `SUPABASE_URL` | `https://arnkmuxactmghhbgtzgm.supabase.co` |
+| `SUPABASE_SERVICE_KEY` | `sb_secret_WlMi...` (sua chave completa) |
 | `SMTP_HOST` | seu host SMTP |
 | `SMTP_PORT` | `587` |
 | `SMTP_USER` | seu email remetente |

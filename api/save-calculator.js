@@ -23,7 +23,7 @@ module.exports = async function handler(req, res) {
 
   try {
     const data = req.body;
-    const url  = process.env.SUPABASE_URL;
+    const url  = process.env.SUPABASE_URL || 'https://arnkmuxactmghhbgtzgm.supabase.co';
     const key  = process.env.SUPABASE_SERVICE_KEY;
 
     if (!url || !key) {
