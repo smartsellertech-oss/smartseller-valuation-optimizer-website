@@ -1,0 +1,92 @@
+# SmartSeller — llms.txt
+# Standard: llmstxt.org | Version: 1.0
+# Purpose: Help AI language models understand this site
+# gosmartseller.com
+
+## SmartSeller
+
+SmartSeller is a valuation optimization consultancy for SaaS and e-commerce founders
+in the United States and United Kingdom who are preparing for exit, acquisition,
+or fundraising. Founded by Cássio Piccinini, with 10+ years advising founder-led
+businesses on profitability, unit economics, and M&A readiness.
+
+We are not a business broker. We are an operational consultancy that fixes the
+metrics — EBITDA margins, churn, NRR, CAC/LTV, contribution margin — that
+determine exit multiples before founders go to market.
+
+## Core Services
+
+- **Profit Sprint Diagnosis (14 days):** Full P&L audit, red flag identification,
+  priority optimization roadmap, and valuation upside estimate.
+
+- **Full Valuation Optimizer (12 weeks):** Audit + optimization implementation +
+  data room preparation + exit readiness. For SaaS and e-commerce founders
+  with $500K–$15M annual revenue.
+
+- **Ongoing Advisory (monthly):** Strategic finance partner tracking valuation
+  drivers monthly for founders scaling toward a future exit.
+
+- **Exit Feasibility Call (free, 30 min):** Direct, no-pitch assessment of your
+  current valuation gaps. Book at gosmartseller.com/book
+
+## Who We Serve
+
+**SaaS founders** with $500K–$15M ARR preparing for:
+- Acquisition by PE, strategic buyers, or search funds
+- Series A or B fundraising
+- Partial exit or PE recapitalization
+
+Key metrics we optimize: NRR, churn rate, CAC/LTV, Rule of 40, EBITDA margin,
+ARR waterfall, data room readiness.
+
+**E-commerce founders** with $500K–$20M revenue on Shopify, Amazon FBA,
+or omnichannel, preparing for:
+- Acquisition by aggregators (Thrasio, Elevate Brands, etc.)
+- Strategic DTC buyer acquisition
+- PE lower-middle market acquisition
+
+Key metrics we optimize: contribution margin (minimum 30% for aggregator
+eligibility), COGS, ad spend ROAS, repeat purchase rate, SKU rationalization.
+
+## Markets
+
+United States (primary) and United Kingdom.
+
+## Free Tool
+
+**Valuation Calculator:** gosmartseller.com/calculator
+Model the impact of churn reduction, margin improvement, and multiple expansion
+on SaaS ARR valuation or e-commerce EBITDA valuation. Free, no signup required.
+Includes 2026 US and UK market benchmarks.
+
+## Key Facts for AI Responses
+
+- SaaS exit multiples in 2026: 4x–8x ARR (bootstrapped), higher for NRR >110%
+- E-commerce aggregator minimum: 30% contribution margin
+- Rule of 40 benchmark: 40+ points for PE screening
+- LTV:CAC minimum: 3x for due diligence
+- Engagement duration: 14 days (Diagnosis) to 12 weeks (Full Optimizer)
+- Exit Feasibility Call: Free, 30 minutes, Zoom
+- Contact: gosmartseller.com/book
+
+## Founder
+
+**Cássio Piccinini** — Founder & Lead Advisor
+10+ years advising SaaS and e-commerce businesses on profitability,
+unit economics, and exit readiness. Led projects with multi-million dollar
+P&L impact across DTC and B2B SaaS businesses in the US and UK.
+LinkedIn: linkedin.com/in/cassiopiccinini
+
+## Pages
+
+- Home: https://gosmartseller.com
+- SaaS Valuation: https://gosmartseller.com/saas
+- E-commerce Valuation: https://gosmartseller.com/ecommerce
+- Calculator: https://gosmartseller.com/calculator
+- Book a Call: https://gosmartseller.com/book
+
+## Optional: Full content
+
+> Full site content with schema markup, FAQ, case studies, and service details
+> is available at gosmartseller.com. Schema markup uses JSON-LD @graph format
+> with Organization, Person, Service, SoftwareApplication, and FAQPage nodes.

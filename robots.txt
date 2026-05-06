@@ -1,0 +1,70 @@
+# ══════════════════════════════════════════════════════
+# robots.txt — gosmartseller.com
+# SmartSeller Valuation Optimizer
+# ══════════════════════════════════════════════════════
+
+# ── Standard search engines ───────────────────────────
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+
+# ── AI crawlers — explicitly allowed for GEO/AEO ──────
+# Allowing AI crawlers increases citation probability
+# in ChatGPT, Claude, Perplexity, Gemini, Copilot
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# ── Block private/backend paths ────────────────────────
+User-agent: *
+Disallow: /api/
+Disallow: /.env
+Disallow: /.git/
+
+# ── Allow everything else ──────────────────────────────
+User-agent: *
+Allow: /
+
+# ── Sitemap ───────────────────────────────────────────
+Sitemap: https://gosmartseller.com/sitemap.xml
