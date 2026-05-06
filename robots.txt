@@ -3,6 +3,16 @@
 # SmartSeller Valuation Optimizer
 # ══════════════════════════════════════════════════════
 
+# ── Google AdsBot (must be explicit — ignores wildcard rules) ─
+# Required for Google Ads destination verification
+User-agent: AdsBot-Google
+Allow: /
+Disallow: /api/
+
+User-agent: AdsBot-Google-Mobile
+Allow: /
+Disallow: /api/
+
 # ── Standard search engines ───────────────────────────
 User-agent: Googlebot
 Allow: /
@@ -20,9 +30,6 @@ User-agent: DuckDuckBot
 Allow: /
 
 # ── AI crawlers — explicitly allowed for GEO/AEO ──────
-# Allowing AI crawlers increases citation probability
-# in ChatGPT, Claude, Perplexity, Gemini, Copilot
-
 User-agent: GPTBot
 Allow: /
 
@@ -56,14 +63,11 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
-# ── Block private/backend paths ────────────────────────
+# ── Block private/backend paths from all bots ─────────
 User-agent: *
 Disallow: /api/
 Disallow: /.env
 Disallow: /.git/
-
-# ── Allow everything else ──────────────────────────────
-User-agent: *
 Allow: /
 
 # ── Sitemap ───────────────────────────────────────────
