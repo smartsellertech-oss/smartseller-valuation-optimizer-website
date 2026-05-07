@@ -1068,6 +1068,168 @@ footer nav a:hover { color: #888; }
   .thanks-actions { flex-direction: column; width: 100%; }
   .thanks-btn-primary, .thanks-btn-ghost { width: 100%; text-align: center; }
 }
+
+/* ═══════════════════════════════════════════════
+   DESKTOP RESOURCES DROPDOWN
+════════════════════════════════════════════════ */
+.nav-res-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-res-trigger {
+  color: #cccccc;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .9px;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  transition: color .15s;
+  white-space: nowrap;
+}
+.nav-res-trigger:hover { color: #fff; }
+.nav-res-dropdown {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  border: 1px solid #e0e4e2;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 520px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.15);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, visibility .18s ease, transform .18s ease;
+  transform: translateX(-50%) translateY(-4px);
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  gap: 0;
+}
+.nav-res-wrap:hover .nav-res-dropdown,
+.nav-res-wrap:focus-within .nav-res-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+/* Arrow pointer */
+.nav-res-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px; height: 12px;
+  background: #fff;
+  border-left: 1px solid #e0e4e2;
+  border-top: 1px solid #e0e4e2;
+}
+.nrd-col {
+  padding: 4px 20px 4px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nrd-col:last-of-type { padding: 4px 0 4px 20px; }
+.nrd-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: #aaa;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: block;
+  font-weight: 500;
+}
+.nrd-col a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: background .1s, color .1s;
+  letter-spacing: 0;
+  text-transform: none;
+  font-family: var(--sans);
+  line-height: 1.3;
+}
+.nrd-col a:hover { background: #f4f5f6; color: #111; }
+.nrd-divider {
+  width: 1px;
+  background: #e8eae9;
+  margin: 4px 0;
+  align-self: stretch;
+}
+.nrd-footer {
+  grid-column: 1 / -1;
+  border-top: 1px solid #e8eae9;
+  margin-top: 12px;
+  padding-top: 12px;
+  text-align: right;
+}
+.nrd-footer a {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+  text-decoration: none;
+  letter-spacing: .3px;
+  font-family: var(--sans);
+  transition: color .15s;
+}
+.nrd-footer a:hover { color: var(--accent-dark, #6b7b72); }
+
+/* ═══════════════════════════════════════════════
+   MOBILE RESOURCES SUBMENU
+════════════════════════════════════════════════ */
+.nm-res-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1e1e1e;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  transition: color .15s;
+}
+.nm-res-toggle:hover { color: #fff; }
+.nm-res-toggle #nm-arrow { transition: transform .2s; font-size: 10px; }
+.nm-res-toggle.open #nm-arrow { transform: rotate(180deg); }
+.nm-res-sub {
+  display: none;
+  flex-direction: column;
+  background: #0d0d0d;
+}
+.nm-res-sub.open { display: flex; }
+.nm-res-sub a {
+  display: block !important;
+  padding: 13px 36px !important;
+  font-size: 12px !important;
+  color: #999 !important;
+  border-bottom: 1px solid #111 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  text-transform: none !important;
+  letter-spacing: .3px !important;
+  transition: color .15s, background .15s !important;
+}
+.nm-res-sub a:hover { color: #eee !important; background: #111 !important; }
+.nm-res-sub a.nm-all {
+  color: #E2EBE5 !important;
+  font-weight: 700 !important;
+  border-bottom: none !important;
+  padding-bottom: 16px !important;
+}
 </style>
 
   <!-- Canonical + Geo targeting -->
@@ -1312,22 +1474,25 @@ footer nav a:hover { color: #888; }
     <a onclick="goTo('saas')" id="nav-saas">SaaS</a>
     <a onclick="goTo('ecom')" id="nav-ecom">E-commerce</a>
     <a onclick="goTo('calc')" id="nav-calc">Calculator</a>
-    <div class="nav-dropdown">
-      <a style="color:#cccccc;cursor:pointer;">Resources</a>
-      <div class="dropdown-menu">
-        <span class="dd-label">SaaS Guides</span>
-        <a href="https://gosmartseller.com/resources/saas-exit-multiples-2026">SaaS Exit Multiples 2026</a>
-        <a href="https://gosmartseller.com/resources/rule-of-40-saas-guide">Rule of 40 Guide</a>
-        <a href="https://gosmartseller.com/resources/saas-due-diligence-checklist">Due Diligence Checklist</a>
-        <div class="dropdown-divider"></div>
-        <span class="dd-label">E-commerce Guides</span>
-        <a href="https://gosmartseller.com/resources/ecommerce-ebitda-multiples-2026">E-commerce Multiples 2026</a>
-        <a href="https://gosmartseller.com/resources/amazon-fba-vs-shopify-dtc-exit">Amazon FBA vs Shopify DTC</a>
-        <div class="dropdown-divider"></div>
-        <span class="dd-label">Exit Strategy</span>
-        <a href="https://gosmartseller.com/resources/business-broker-vs-ma-advisor">Broker vs M&amp;A Advisor</a>
-        <div class="dropdown-divider"></div>
-        <a href="https://gosmartseller.com/resources" style="font-weight:700;color:#111;">View all guides →</a>
+    <div class="nav-res-wrap">
+      <a class="nav-res-trigger" tabindex="0">Resources ▾</a>
+      <div class="nav-res-dropdown">
+        <div class="nrd-col">
+          <span class="nrd-label">SaaS</span>
+          <a href="https://gosmartseller.com/resources/saas-exit-multiples-2026">Exit Multiples 2026</a>
+          <a href="https://gosmartseller.com/resources/rule-of-40-saas-guide">Rule of 40 Guide</a>
+          <a href="https://gosmartseller.com/resources/saas-due-diligence-checklist">Due Diligence Checklist</a>
+        </div>
+        <div class="nrd-divider"></div>
+        <div class="nrd-col">
+          <span class="nrd-label">E-commerce</span>
+          <a href="https://gosmartseller.com/resources/ecommerce-ebitda-multiples-2026">EBITDA Multiples 2026</a>
+          <a href="https://gosmartseller.com/resources/amazon-fba-vs-shopify-dtc-exit">Amazon FBA vs Shopify DTC</a>
+          <a href="https://gosmartseller.com/resources/business-broker-vs-ma-advisor">Broker vs M&amp;A Advisor</a>
+        </div>
+        <div class="nrd-footer">
+          <a href="https://gosmartseller.com/resources">View all guides →</a>
+        </div>
       </div>
     </div>
     <a onclick="goTo('saas'); setTimeout(()=>scrollToId('saas-qual'),100)" class="nav-pill" id="nav-pill-diag">Free Diagnosis</a>
@@ -1343,17 +1508,17 @@ footer nav a:hover { color: #888; }
   <a onclick="goTo('saas');toggleMobileMenu()">SaaS</a>
   <a onclick="goTo('ecom');toggleMobileMenu()">E-commerce</a>
   <a onclick="goTo('calc');toggleMobileMenu()">Calculator</a>
-  <div class="nav-mobile-resources" id="nav-mobile-res-btn" onclick="toggleMobileResources()">
-    Resources <span id="nav-res-arrow">▾</span>
+  <div class="nm-res-toggle" onclick="toggleMobileResources()">
+    Resources <span id="nm-arrow">▾</span>
   </div>
-  <div class="nav-mobile-sub" id="nav-mobile-sub">
+  <div class="nm-res-sub" id="nm-res-sub">
     <a href="https://gosmartseller.com/resources/saas-exit-multiples-2026" onclick="toggleMobileMenu()">SaaS Exit Multiples 2026</a>
     <a href="https://gosmartseller.com/resources/rule-of-40-saas-guide" onclick="toggleMobileMenu()">Rule of 40 Guide</a>
     <a href="https://gosmartseller.com/resources/saas-due-diligence-checklist" onclick="toggleMobileMenu()">Due Diligence Checklist</a>
     <a href="https://gosmartseller.com/resources/ecommerce-ebitda-multiples-2026" onclick="toggleMobileMenu()">E-commerce Multiples 2026</a>
     <a href="https://gosmartseller.com/resources/amazon-fba-vs-shopify-dtc-exit" onclick="toggleMobileMenu()">Amazon FBA vs Shopify DTC</a>
     <a href="https://gosmartseller.com/resources/business-broker-vs-ma-advisor" onclick="toggleMobileMenu()">Broker vs M&amp;A Advisor</a>
-    <a href="https://gosmartseller.com/resources" onclick="toggleMobileMenu()" style="font-weight:700;color:#E2EBE5 !important;">View all guides →</a>
+    <a href="https://gosmartseller.com/resources" onclick="toggleMobileMenu()" class="nm-all">View all guides →</a>
   </div>
   <a onclick="goTo('saas');setTimeout(()=>scrollToId('saas-qual'),100);toggleMobileMenu()">Free Diagnosis</a>
   <a class="cta-mobile" onclick="goTo('book');toggleMobileMenu()">Book Assessment →</a>
@@ -2872,18 +3037,18 @@ function toggleMobileMenu() {
   m.classList.toggle('open');
   // Close resources submenu when closing main menu
   if (!m.classList.contains('open')) {
-    var sub = document.getElementById('nav-mobile-sub');
-    var btn = document.getElementById('nav-mobile-res-btn');
+    var sub = document.getElementById('nm-res-sub');
+    var btn = document.querySelector('.nm-res-toggle');
     if (sub) sub.classList.remove('open');
     if (btn) btn.classList.remove('open');
   }
 }
 
 function toggleMobileResources() {
-  var sub = document.getElementById('nav-mobile-sub');
-  var btn = document.getElementById('nav-mobile-res-btn');
-  sub.classList.toggle('open');
-  btn.classList.toggle('open');
+  var sub = document.getElementById('nm-res-sub');
+  var btn = document.querySelector('.nm-res-toggle');
+  if (sub) sub.classList.toggle('open');
+  if (btn) btn.classList.toggle('open');
 }
 
 function goTo(page) {
