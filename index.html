@@ -476,11 +476,24 @@ footer nav a:hover { color: #888; }
 /* ===================== MOBILE MENU ===================== */
 .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
 .nav-hamburger span { width: 22px; height: 2px; background: #fff; display: block; transition: all .2s; }
-.nav-mobile { display: none; flex-direction: column; background: #111; padding: 20px; gap: 0; border-top: 1px solid #222; }
+.nav-mobile {
+  display: none; flex-direction: column;
+  background: #111111;
+  padding: 0;
+  gap: 0;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  z-index: 998;
+  border-top: 1px solid #222;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  max-height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+}
 .nav-mobile.open { display: flex; }
-.nav-mobile a { color: #aaa; text-decoration: none; font-size: 13px; letter-spacing: .5px; text-transform: uppercase; padding: 14px 0; border-bottom: 1px solid #1e1e1e; cursor: pointer; font-weight: 500; }
+.nav-mobile a { color: #ccc; text-decoration: none; font-size: 13px; letter-spacing: .5px; text-transform: uppercase; padding: 16px 24px; border-bottom: 1px solid #1e1e1e; cursor: pointer; font-weight: 600; display: block; }
 .nav-mobile a:last-child { border-bottom: none; }
-.nav-mobile a.cta-mobile { color: #E2EBE5; font-weight: 700; margin-top: 8px; }
+.nav-mobile a.cta-mobile { color: #E2EBE5; font-weight: 700; background: rgba(226,235,229,.06); }
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
@@ -1299,6 +1312,24 @@ footer nav a:hover { color: #888; }
     <a onclick="goTo('saas')" id="nav-saas">SaaS</a>
     <a onclick="goTo('ecom')" id="nav-ecom">E-commerce</a>
     <a onclick="goTo('calc')" id="nav-calc">Calculator</a>
+    <div class="nav-dropdown">
+      <a style="color:#cccccc;cursor:pointer;">Resources</a>
+      <div class="dropdown-menu">
+        <span class="dd-label">SaaS Guides</span>
+        <a href="https://gosmartseller.com/resources/saas-exit-multiples-2026">SaaS Exit Multiples 2026</a>
+        <a href="https://gosmartseller.com/resources/rule-of-40-saas-guide">Rule of 40 Guide</a>
+        <a href="https://gosmartseller.com/resources/saas-due-diligence-checklist">Due Diligence Checklist</a>
+        <div class="dropdown-divider"></div>
+        <span class="dd-label">E-commerce Guides</span>
+        <a href="https://gosmartseller.com/resources/ecommerce-ebitda-multiples-2026">E-commerce Multiples 2026</a>
+        <a href="https://gosmartseller.com/resources/amazon-fba-vs-shopify-dtc-exit">Amazon FBA vs Shopify DTC</a>
+        <div class="dropdown-divider"></div>
+        <span class="dd-label">Exit Strategy</span>
+        <a href="https://gosmartseller.com/resources/business-broker-vs-ma-advisor">Broker vs M&amp;A Advisor</a>
+        <div class="dropdown-divider"></div>
+        <a href="https://gosmartseller.com/resources" style="font-weight:700;color:#111;">View all guides →</a>
+      </div>
+    </div>
     <a onclick="goTo('saas'); setTimeout(()=>scrollToId('saas-qual'),100)" class="nav-pill" id="nav-pill-diag">Free Diagnosis</a>
     <a onclick="goTo('home')" class="nav-pill" id="nav-back-home" style="display:none;">← Back to site</a>
     <a onclick="goTo('book')" class="nav-cta" id="nav-book">Book Assessment →</a>
@@ -1312,6 +1343,18 @@ footer nav a:hover { color: #888; }
   <a onclick="goTo('saas');toggleMobileMenu()">SaaS</a>
   <a onclick="goTo('ecom');toggleMobileMenu()">E-commerce</a>
   <a onclick="goTo('calc');toggleMobileMenu()">Calculator</a>
+  <div class="nav-mobile-resources" id="nav-mobile-res-btn" onclick="toggleMobileResources()">
+    Resources <span id="nav-res-arrow">▾</span>
+  </div>
+  <div class="nav-mobile-sub" id="nav-mobile-sub">
+    <a href="https://gosmartseller.com/resources/saas-exit-multiples-2026" onclick="toggleMobileMenu()">SaaS Exit Multiples 2026</a>
+    <a href="https://gosmartseller.com/resources/rule-of-40-saas-guide" onclick="toggleMobileMenu()">Rule of 40 Guide</a>
+    <a href="https://gosmartseller.com/resources/saas-due-diligence-checklist" onclick="toggleMobileMenu()">Due Diligence Checklist</a>
+    <a href="https://gosmartseller.com/resources/ecommerce-ebitda-multiples-2026" onclick="toggleMobileMenu()">E-commerce Multiples 2026</a>
+    <a href="https://gosmartseller.com/resources/amazon-fba-vs-shopify-dtc-exit" onclick="toggleMobileMenu()">Amazon FBA vs Shopify DTC</a>
+    <a href="https://gosmartseller.com/resources/business-broker-vs-ma-advisor" onclick="toggleMobileMenu()">Broker vs M&amp;A Advisor</a>
+    <a href="https://gosmartseller.com/resources" onclick="toggleMobileMenu()" style="font-weight:700;color:#E2EBE5 !important;">View all guides →</a>
+  </div>
   <a onclick="goTo('saas');setTimeout(()=>scrollToId('saas-qual'),100);toggleMobileMenu()">Free Diagnosis</a>
   <a class="cta-mobile" onclick="goTo('book');toggleMobileMenu()">Book Assessment →</a>
 </nav>
@@ -2827,6 +2870,20 @@ var formAnswers = {};
 function toggleMobileMenu() {
   var m = document.getElementById('nav-mobile');
   m.classList.toggle('open');
+  // Close resources submenu when closing main menu
+  if (!m.classList.contains('open')) {
+    var sub = document.getElementById('nav-mobile-sub');
+    var btn = document.getElementById('nav-mobile-res-btn');
+    if (sub) sub.classList.remove('open');
+    if (btn) btn.classList.remove('open');
+  }
+}
+
+function toggleMobileResources() {
+  var sub = document.getElementById('nav-mobile-sub');
+  var btn = document.getElementById('nav-mobile-res-btn');
+  sub.classList.toggle('open');
+  btn.classList.toggle('open');
 }
 
 function goTo(page) {
