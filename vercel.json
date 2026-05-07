@@ -5,11 +5,6 @@
   "outputDirectory": ".",
   "routes": [
     {
-      "src": "https://www.gosmartseller.com/(.*)",
-      "destination": "https://gosmartseller.com/$1",
-      "permanent": true
-    },
-    {
       "src": "/api/(.*)",
       "dest": "/api/$1"
     },
@@ -112,6 +107,13 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "https://www.gosmartseller.com/(.*)",
+      "destination": "https://gosmartseller.com/$1",
+      "permanent": true
     }
   ]
 }
