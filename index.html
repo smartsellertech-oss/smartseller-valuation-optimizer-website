@@ -3663,6 +3663,153 @@ calcMain();
 </div><!-- /page-thanks -->
 
 <!-- Vercel Analytics -->
-<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/insights/script.js">
+
+// ═══════════════════════════════════════════════════════════
+// VERCEL ANALYTICS — Custom Event Tracking
+// Tracks: CTA clicks, form steps, calculator interactions
+// Dashboard: vercel.com → project → Analytics → Events
+// ═══════════════════════════════════════════════════════════
+
+function vTrack(eventName, props) {
+  // Use Vercel's window.va() injected by /_vercel/insights/script.js
+  if (typeof window.va === 'function') {
+    window.va('event', { name: eventName, ...(props || {}) });
+  }
+  // Also log to console in dev for debugging
+  if (window.location.hostname === 'localhost') {
+    console.log('[Analytics]', eventName, props || '');
+  }
+}
+
+// ── CTA Button tracking ──────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+
+  // Track all nav CTA clicks
+  var bookBtns = document.querySelectorAll('.nav-cta, .btn-primary, .cta-btn, .book-confirm-btn, .thanks-btn-primary');
+  bookBtns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      vTrack('cta_click', {
+        label: btn.textContent.trim().substring(0, 40),
+        location: document.getElementById('page-' + (window._currentPage || 'home')) ? window._currentPage || 'home' : 'unknown'
+      });
+    });
+  });
+
+  // Track Free Diagnosis pill
+  var diagBtn = document.getElementById('nav-pill-diag');
+  if (diagBtn) {
+    diagBtn.addEventListener('click', function() {
+      vTrack('cta_click', { label: 'Free Diagnosis', location: 'nav' });
+    });
+  }
+
+  // Track mobile Book Assessment
+  var mobileCta = document.querySelector('.cta-mobile');
+  if (mobileCta) {
+    mobileCta.addEventListener('click', function() {
+      vTrack('cta_click', { label: 'Book Assessment Mobile', location: 'nav_mobile' });
+    });
+  }
+
+  // ── Calculator mode switch ─────────────────────────────────
+  var saasBtn = document.getElementById('cm-saas-btn');
+  var ecomBtn = document.getElementById('cm-ecom-btn');
+  if (saasBtn) saasBtn.addEventListener('click', function() {
+    vTrack('calculator_mode', { mode: 'saas' });
+  });
+  if (ecomBtn) ecomBtn.addEventListener('click', function() {
+    vTrack('calculator_mode', { mode: 'ecommerce' });
+  });
+
+  // ── Slider interactions (throttled — fire after user stops) ──
+  var sliderTimers = {};
+  document.querySelectorAll('input[type=range]').forEach(function(slider) {
+    slider.addEventListener('input', function() {
+      var id = slider.id || 'unknown';
+      clearTimeout(sliderTimers[id]);
+      sliderTimers[id] = setTimeout(function() {
+        vTrack('calculator_interaction', {
+          field: id,
+          value: slider.value,
+          panel: slider.closest('.calc-inputs-panel') ? 'calculator_page' :
+                 slider.closest('.cc-body, .mc-body') ? 'inline_calculator' : 'other'
+        });
+      }, 1000); // fires 1s after user stops dragging
+    });
+  });
+
+  // ── Form step tracking ────────────────────────────────────
+  // Patch fNext/fPrev to track funnel steps
+  var _origFNext = window.fNext;
+  window.fNext = function(prefix, n, total) {
+    vTrack('form_step', {
+      form: prefix === 'sq' ? 'saas_quiz' : prefix === 'eq' ? 'ecom_quiz' : 'calc_quiz',
+      step: n,
+      total: total,
+      direction: 'forward'
+    });
+    if (_origFNext) _origFNext(prefix, n, total);
+  };
+
+  // ── Form completion tracking ──────────────────────────────
+  var _origFSubmit = window.fSubmit;
+  window.fSubmit = function(prefix) {
+    vTrack('form_complete', {
+      form: prefix === 'sq' ? 'saas_quiz' : prefix === 'eq' ? 'ecom_quiz' : 'calc_quiz',
+      answers_count: Object.keys(window.formAnswers[prefix] || {}).length
+    });
+    if (_origFSubmit) _origFSubmit(prefix);
+  };
+
+  // ── Page navigation tracking ──────────────────────────────
+  var _origGoTo = window.goTo;
+  window.goTo = function(page) {
+    window._currentPage = page;
+    vTrack('page_view', { page: page });
+    if (_origGoTo) _origGoTo(page);
+  };
+
+  // ── Booking page reached ──────────────────────────────────
+  var _origGoToThanks = window.goToThanks;
+  window.goToThanks = function() {
+    vTrack('booking_confirmed', { source: window._currentPage || 'unknown' });
+    if (_origGoToThanks) _origGoToThanks();
+  };
+
+  // ── Resource page links in nav dropdown ───────────────────
+  document.querySelectorAll('.nrd-col a, .nm-res-sub a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      vTrack('resource_click', {
+        page: link.getAttribute('href') || '',
+        location: link.closest('.nm-res-sub') ? 'mobile_nav' : 'desktop_nav'
+      });
+    });
+  });
+
+  // ── Calc output CTA (Get My Roadmap) ─────────────────────
+  document.querySelectorAll('.co-cta, .op-drivers button').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var mode = document.getElementById('cm-ecom-btn') &&
+                 document.getElementById('cm-ecom-btn').classList.contains('active')
+                 ? 'ecommerce' : 'saas';
+      vTrack('calculator_cta_click', { mode: mode });
+    });
+  });
+
+  // ── Scroll depth tracking (25/50/75/100%) ────────────────
+  var scrollDepths = { 25: false, 50: false, 75: false, 100: false };
+  window.addEventListener('scroll', function() {
+    var scrolled = (window.scrollY + window.innerHeight) / document.documentElement.scrollHeight * 100;
+    [25, 50, 75, 100].forEach(function(depth) {
+      if (!scrollDepths[depth] && scrolled >= depth) {
+        scrollDepths[depth] = true;
+        vTrack('scroll_depth', { depth: depth + '%', page: window._currentPage || 'home' });
+      }
+    });
+  }, { passive: true });
+
+}); // end DOMContentLoaded
+
+</script>
 </body>
-</html>
